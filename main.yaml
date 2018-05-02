@@ -9,6 +9,11 @@
 #      tags:
 #        - pre-settings
     
+    - name: Update Package
+      shell: apt update && apt upgrade -y
+      args:
+        executable: /bin/bash
+
     - name: Install nginx
       shell: apt install nginx -y
       args:
