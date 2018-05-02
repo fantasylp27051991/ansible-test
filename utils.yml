@@ -1,4 +1,4 @@
-- hosts: webservers
+- hosts: myVM
   gather_facts: yes
   sudo: yes
   tasks:
