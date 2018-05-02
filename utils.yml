@@ -1,5 +1,4 @@
-- hosts: myVM
-  connection: local
+- hosts: webservers
   gather_facts: yes
   sudo: yes
   tasks:
