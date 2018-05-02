@@ -1,0 +1,6 @@
+- hosts: TF
+  tasks:
+    - name: Deploy Terraform
+      shell: cd /home/denisz/terraform/terraform/azure/ && terraform apply -auto-approve
+      args:
+        executable: /bin/bash
