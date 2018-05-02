@@ -1,23 +1,19 @@
+- hosts: TF
+  tasks:
+    - name: Deploy Terraform
+      shell: cd /home/denisz/terraform/terraform/tf_ansible/ && terraform apply -auto-approve
+      args:
+        executable: /bin/bash
+
 - hosts: myVM
   gather_facts: yes
   sudo: yes
   tasks:
-#    - name: Deploy Terraform
-#      shell: terraform apply -auto-approve
-#      args:
-#        executable: /bin/bash
-#      tags:
-#        - pre-settings
-    
+
     - name: Update Package
       shell: sudo apt-get update && sudo apt-get upgrade -y
       args:
         executable: /bin/bash
-
-#    - name: Install nginx
-#      shell: apt install nginx -y
-#      args:
-#        executable: /bin/bash
 
     - name: Install the package "mc"
       shell: sudo apt-get install mc -y
