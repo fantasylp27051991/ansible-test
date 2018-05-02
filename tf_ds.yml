@@ -2,6 +2,6 @@
   sudo: yes
   tasks:
     - name: Deploy Terraform
-      shell: cd /home/denisz/terraform/terraform/azure/ && terraform apply -auto-approve
+      shell: cd /home/denisz/terraform/terraform/azure/ && terraform destroy -auto-approve
       args:
         executable: /bin/bash
