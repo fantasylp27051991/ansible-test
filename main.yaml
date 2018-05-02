@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: myVM
   connection: local
   gather_facts: yes
   tasks:
@@ -14,10 +14,10 @@
       args:
         executable: /bin/bash
 
-    - name: Install nginx
-      shell: apt install nginx -y
-      args:
-        executable: /bin/bash
+#    - name: Install nginx
+#      shell: apt install nginx -y
+#      args:
+#        executable: /bin/bash
 
     - name: Install the package "mc"
       shell: apt install mc -y
