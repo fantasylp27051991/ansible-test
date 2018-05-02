@@ -1,0 +1,35 @@
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+  tasks:
+    - name: Deploy Terraform
+      shell: terraform apply -auto-approve
+      args:
+        executable: /bin/bash
+      tags:
+        - pre-settings
+    
+    - name: Install the package "nginx"
+      shell: apt install nginx -y
+      args:
+	    executable: /bin/bash
+
+    - name: Install the package "mc"
+      shell: apt install mc -y
+      args:
+	    executable: /bin/bash
+
+    - name: Install the package "htop"
+      shell: apt install htop -y
+      args:
+	    executable: /bin/bash
+
+    - name: Install the package "iptraf"
+      shell: apt install iptraf -y
+      args:
+	    executable: /bin/bash
+
+	- name: Run nginx
+	  shell: service nginx start
+	  args:
+	    executable: /bin/bash
