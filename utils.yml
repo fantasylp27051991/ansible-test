@@ -11,7 +11,7 @@
 #        - pre-settings
     
     - name: Update Package
-      shell: apt-get update && apt-get upgrade -y
+      shell: sudo apt-get update && sudo apt-get upgrade -y
       args:
         executable: /bin/bash
 
@@ -21,17 +21,17 @@
 #        executable: /bin/bash
 
     - name: Install the package "mc"
-      shell: apt-get install mc -y
+      shell: sudo apt-get install mc -y
       args:
         executable: /bin/bash
 
     - name: Install the package "htop"
-      shell: apt-get install htop -y
+      shell: sudo apt-get install htop -y
       args:
         executable: /bin/bash
 
     - name: Install the package "iptraf"
-      shell: apt-get install iptraf -y
+      shell: sudo apt-get install iptraf -y
       args:
         executable: /bin/bash
 
