@@ -1,4 +1,4 @@
-- hosts: TF
+- hosts: 35.234.100.212
   tasks:
     - name: Deploy Terraform
       shell: cd /home/denisz/terraform/terraform/azure/ && terraform apply -auto-approve
