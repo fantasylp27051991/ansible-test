@@ -9,7 +9,7 @@
 #      tags:
 #        - pre-settings
     
-    - name: Install the package "nginx"
+    - name: Install nginx
       shell: apt install nginx -y
       args:
         executable: /bin/bash
