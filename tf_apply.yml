@@ -1,4 +1,4 @@
-- hosts: 35.234.100.212
+- hosts: 35.198.125.114 
   sudo: yes
   tasks:
     - name: Deploy Terraform
