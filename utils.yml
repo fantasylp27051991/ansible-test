@@ -23,3 +23,8 @@
       args:
         executable: /bin/bash
 
+    - name: Install Apache2
+      shell: sudo apt-get install apache2 -y 
+      args:
+        executable: /bin/bash
+
