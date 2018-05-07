@@ -1,4 +1,4 @@
 - hosts: lamp
   roles:
-    - role: fvarovillodres.lamp
+    - role: lamp
       become: yes
