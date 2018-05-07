@@ -1,4 +1,4 @@
-- hosts: terraform.overagehosts.info
+- hosts: 35.234.103.64
   sudo: yes
   tasks:
     - name: Deploy Terraform
