@@ -1,10 +1,6 @@
 - hosts: lamp
   sudo: yes
   tasks:
-    - name: Update Package
-      shell: sudo apt-get update && sudo apt-get upgrade -y
-      args:
-        executable: /bin/bash
 
     - name: Check if MySQL is already installed.
       stat: path=/etc/init.d/mysql
@@ -14,15 +10,27 @@
       apt: update_cache=yes
       when: mysql_installed.stat.exists == false
 
-    - name: Install python2 for Ansible
-      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
-      register: output
-      changed_when: output.stdout != ""
-    - name: Gathering Facts
-      setup:
-  roles:
-    - apache2
-    - mysql
-    - php-fpm
-  vars:
-    mysql_root_password: "mypass"      service: name=apache2 state=running enabled=yes
+    - name: Add the repository for MySql 5.6
+      become: yes
+      command: add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+
+    - name: Update Package
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+      args:
+        executable: /bin/bash
+
+    - name: Install mysql
+      apt: pkg=mysql-server-5.6 state=installed
+
+    - name : Ensure mysql started
+      become: yes
+      service: name=mysql state=started enabled=yes
+
+    - name: Update MySQL root password for all root accounts
+      mysql_user: name=root
+                  host=lamp
+                  password=Qsx1@3esZ
+                  login_user=root
+                  login_password=""
+                  state=present
+                  
