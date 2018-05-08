@@ -19,6 +19,19 @@
       args:
         executable: /bin/bash
 
+    - name: Install python
+      apt: pkg={{item}} state=present update_cache=yes cache_valid_time=604800
+      with_items:
+        - sysstat
+        - python-setuptools
+        - python-dev
+        - build-essential
+
+    - name: Install pip
+      shell: sudo easy_install pip
+      args:
+        executable: /bin/bash
+
     - name: Install the Python MySQLB module
       pip: name=MySQL-python
 
