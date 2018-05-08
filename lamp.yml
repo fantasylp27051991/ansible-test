@@ -19,6 +19,12 @@
       args:
         executable: /bin/bash
 
+    - name: Install the Python MySQLB module
+      pip: name=MySQL-python
+
+    - name: Create the flask database
+      mysql_db: name=flask_db state=present
+
     - name: Install mysql
       apt: pkg=mysql-server-5.6 state=installed
 
@@ -33,4 +39,3 @@
                   login_user=root
                   login_password=""
                   state=present
-                  
