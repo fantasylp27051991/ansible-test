@@ -1,7 +1,5 @@
 - hosts: lamp
   sudo: yes
-  vars:
-    mysql_root_password: fart
   tasks:
     - name: Install Apache
       apt: name=apache2 state=present
