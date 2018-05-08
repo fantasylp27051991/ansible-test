@@ -32,20 +32,4 @@
       args:
         executable: /bin/bash
 
-    - name: Install the Python MySQLB module
-      pip: name=mysql-python
 
-    - name: Install mysql
-      apt: pkg=mysql-server-5.6 state=installed
-
-    - name : Ensure mysql started
-      become: yes
-      service: name=mysql state=started enabled=yes
-
-    - name: Update MySQL root password for all root accounts
-      mysql_user: name=root
-                  host=lamp
-                  password=Qsx1@3esZ
-                  login_user=root
-                  login_password=""
-                  state=present
