@@ -10,10 +10,6 @@
       apt: update_cache=yes
       when: mysql_installed.stat.exists == false
 
-    - name: Add the repository for MySql 5.6
-      become: yes
-      command: add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
-
     - name: Update Package
       shell: sudo apt-get update && sudo apt-get upgrade -y
       args:
@@ -32,4 +28,36 @@
       args:
         executable: /bin/bash
 
+    - name: Install Apache
+      apt: name=apache2 state=present
+
+    - name: Install PHP module for Apache
+      apt: name=libapache2-mod-php5 state=present
+
+    - name: Start Apache
+      service: name=apache2 state=running enabled=yes
+
+    - name: Add key
+      apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xCBCB082A1BB943DB state=present
+
+    - name: Add repository
+      apt_repository: repo='deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu $ansible_distribution_release main' state=present update_cache=yes
+
+    - name: Install MariaDB
+      apt: name=mariadb-server state=present
+
+    - name: Start Mysql Service
+      service: name=mysql state=started enabled=true
+
+    - name: Install python Mysql package #required for mysql_db tasks
+      apt: name=python-mysqldb state=present
+
+    - name: Create a new database
+      mysql_db: name=wp state=present collation=utf8_general_ci
+
+    - name: Create a database user
+      mysql_user: name=wp password=Qsx1@3esZ priv=*.*:ALL host=localhost state=present
+
+    - name: Install MySQL extension for PHP
+      apt: name=php5-mysql state=present
 
