@@ -9,11 +9,5 @@
     - name: Install PHP module for Apache
       apt: name=libapache2-mod-php5 state=present
 
-    - name: Start the MySQL service
-      service:
-        name: mysql
-        state: started
-        enabled: true
-
     - name: start Apache
       service: name=apache2 state=running enabled=yes
