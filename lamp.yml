@@ -33,7 +33,7 @@
         executable: /bin/bash
 
     - name: Install the Python MySQLB module
-      pip: name=MySQL-python
+      pip: name=mysql-python
 
     - name: Create the flask database
       mysql_db: name=flask_db state=present
