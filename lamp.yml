@@ -1,18 +1,10 @@
 - hosts: lamp
   sudo: yes
-  tasks:
+  become: true
+  gather_facts: false
+  pre_tasks:
     - name: Update Package
       shell: sudo apt-get update && sudo apt-get upgrade -y
-      args:
-        executable: /bin/bash
-
-    - name: Install the package "Apache2"
-      shell: sudo apt-get install apache2 -y
-      args:
-        executable: /bin/bash
-
-    - name: Install Apache2
-      shell: sudo apt-get install apache2 -y
       args:
         executable: /bin/bash
 
@@ -20,24 +12,15 @@
       stat: path=/etc/init.d/mysql
       register: mysql_installed
 
-    - name: Update apt cache if MySQL is not yet installed.
-      apt: update_cache=yes
-      when: mysql_installed.stat.exists == false
-
-    - name: install mysql-server
-      action: apt name=mysql-server
-      notify:
-        - mysql_secure_installation
-
-    - name: write conf.d/mysqld.cnf
-      action: template src=templates/mysqld.cnf.j2 dest=/etc/mysql/conf.d/mysqld.cnf
-      notify:
-        - restart mysql
-
-    - name: write conf.d/client.cnf
-      action: template src=templates/client.cnf.j2 dest=/etc/mysql/conf.d/client.cnf
-      notify:
-        - restart mysql
-
-    - name: start Apache
-      service: name=apache2 state=running enabled=yes
+    - name: Install python2 for Ansible
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+      register: output
+      changed_when: output.stdout != ""
+    - name: Gathering Facts
+      setup:
+    roles:
+      - apache2
+      - mysql
+      - php-fpm
+    vars:
+      mysql_root_password: "Qsx1@3esZ"
